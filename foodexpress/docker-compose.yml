@@ -1,0 +1,66 @@
+services:
+  customer-db:
+    image: postgres:16
+    container_name: foodexpress-customer-db
+    environment:
+      POSTGRES_DB: customerdb
+      POSTGRES_USER: customer
+      POSTGRES_PASSWORD: customerpass
+    ports:
+      - "5441:5432"
+    volumes:
+      - customer_db_data:/var/lib/postgresql/data
+    networks:
+      - foodexpress-net
+
+  restaurant-db:
+    image: postgres:16
+    container_name: foodexpress-restaurant-db
+    environment:
+      POSTGRES_DB: restaurantdb
+      POSTGRES_USER: restaurant
+      POSTGRES_PASSWORD: restaurantpass
+    ports:
+      - "5442:5432"
+    volumes:
+      - restaurant_db_data:/var/lib/postgresql/data
+    networks:
+      - foodexpress-net
+
+  order-db:
+    image: postgres:16
+    container_name: foodexpress-order-db
+    environment:
+      POSTGRES_DB: orderdb
+      POSTGRES_USER: order
+      POSTGRES_PASSWORD: orderpass
+    ports:
+      - "5443:5432"
+    volumes:
+      - order_db_data:/var/lib/postgresql/data
+    networks:
+      - foodexpress-net
+
+  delivery-db:
+    image: postgres:16
+    container_name: foodexpress-delivery-db
+    environment:
+      POSTGRES_DB: deliverydb
+      POSTGRES_USER: delivery
+      POSTGRES_PASSWORD: deliverypass
+    ports:
+      - "5444:5432"
+    volumes:
+      - delivery_db_data:/var/lib/postgresql/data
+    networks:
+      - foodexpress-net
+
+volumes:
+  customer_db_data:
+  restaurant_db_data:
+  order_db_data:
+  delivery_db_data:
+
+networks:
+  foodexpress-net:
+    driver: bridge
